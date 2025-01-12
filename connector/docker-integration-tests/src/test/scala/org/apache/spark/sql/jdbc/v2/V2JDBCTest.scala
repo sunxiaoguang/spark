@@ -997,7 +997,6 @@ private[v2] trait V2JDBCTest extends SharedSparkSession with DockerIntegrationFu
         // Create a table with binary column
         val binary = "X'123456'"
 
-        sql(s"CREATE TABLE $tableName (binary_col BINARY)")
         sql(s"INSERT INTO $tableName VALUES ($binary)")
 
         val select = s"SELECT * FROM $tableName WHERE binary_col = $binary"

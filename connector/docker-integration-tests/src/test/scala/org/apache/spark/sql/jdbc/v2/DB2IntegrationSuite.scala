@@ -68,6 +68,9 @@ class DB2IntegrationSuite extends DockerJDBCIntegrationV2Suite with V2JDBCTest {
          |)
                    """.stripMargin
     ).executeUpdate()
+    Using(connection.createStatement()) {
+      _.execute("CREATE TABLE test_binary_literal (binary_col BLOB)")
+    }
   }
 
   override def testUpdateColumnType(tbl: String): Unit = {

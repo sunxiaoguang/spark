@@ -139,6 +139,10 @@ class PostgresIntegrationSuite extends DockerJDBCIntegrationV2Suite with V2JDBCT
       .executeUpdate()
     connection.prepareStatement("INSERT INTO unsupported_array_of_array_of_int " +
       "VALUES (array[array[1],array[2]]), (array[3])").executeUpdate()
+
+    Using(connection.createStatement()) {
+      _.execute("CREATE TABLE test_binary_literal (binary_col BYTEA)")
+    }
   }
 
   test("Test multi-dimensional column types") {

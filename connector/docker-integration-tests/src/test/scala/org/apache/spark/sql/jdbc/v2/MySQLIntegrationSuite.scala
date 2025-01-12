@@ -82,6 +82,9 @@ class MySQLIntegrationSuite extends DockerJDBCIntegrationV2Suite with V2JDBCTest
     connection.prepareStatement(
       "CREATE TABLE datetime (name VARCHAR(32), date1 DATE, time1 TIMESTAMP)")
       .executeUpdate()
+    Using(connection.createStatement()) {
+      _.execute("CREATE TABLE test_binary_literal (binary_col BLOB)")
+    }
   }
 
   override def dataPreparation(connection: Connection): Unit = {

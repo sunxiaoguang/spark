@@ -91,6 +91,9 @@ class MsSqlServerIntegrationSuite extends DockerJDBCIntegrationV2Suite with V2JD
          |)
                    """.stripMargin
     ).executeUpdate()
+    Using(connection.createStatement()) {
+      _.execute("CREATE TABLE test_binary_literal (binary_col VARBINARY(MAX))")
+    }
   }
 
   override def notSupportsTableComment: Boolean = true
